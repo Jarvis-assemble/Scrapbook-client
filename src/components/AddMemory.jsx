@@ -76,7 +76,7 @@ function AddMemory({ onAddMemory }) {
           />
           <hr />
           <button type="submit">
-            <span>Add to Scrapbook</span>
+            <span>Remember✨</span>
           </button>
         </form>
       </div>
