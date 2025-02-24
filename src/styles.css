@@ -145,7 +145,7 @@ body {
   border: solid 3px transparent;
   border-bottom: dashed 3px #fdcb6e;
   font-family: "Architects Daughter", cursive;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: hsla(260, 2%, 1%, 0.7);
   width: 70%;
   margin-bottom: 20px;
@@ -172,6 +172,7 @@ body {
   padding: 10px 15px;
   border: 2px solid hsl(198, 1%, 29%);
   border-radius: 5px;
+  font-size: 1.5rem;
   background: #f1f5f8;
 }
 
