@@ -40,7 +40,7 @@ function Note({ title }) {
       }`}
     >
       <h1>{title.toUpperCase()}</h1>
-      {title.toLowerCase() === "scrapbook" ? (
+      {title.toLowerCase() === "memories" ? (
         <Scrapbook pages={memoryPages} />
       ) : title.toLowerCase() === "adding-memories" ? (
         <AddMemory onAddMemory={handleAddMemory} />
