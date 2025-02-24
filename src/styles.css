@@ -97,9 +97,9 @@ body {
 }
 
 .memory-page img {
-  max-width: 100%; 
+  max-width: 100%;
   max-height: 100%;
-  object-fit: contain; 
+  object-fit: contain;
   border-radius: 8px;
   box-shadow: 4px 3px 7px 2px #00000040;
   margin: 10px 0;
@@ -116,9 +116,10 @@ body {
   background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   border-radius: 20px;
   text-align: center;
-  overflow: hidden; 
-  color: white; 
-  border-radius: 10px; 
+  overflow: hidden;
+  color: white;
+  border-radius: 10px;
+}
 
 .heading {
   display: flex;
