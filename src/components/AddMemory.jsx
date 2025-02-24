@@ -42,7 +42,7 @@ function AddMemory({ onAddMemory }) {
 
   return (
     <div className="memories-container">
-      <h2>Add a Memory</h2>
+      <h2>Cheers to a new memory!🔮</h2>
       <div className="form">
         <form onSubmit={handleSubmit}>
           <input

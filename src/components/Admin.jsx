@@ -3,8 +3,8 @@ import "./../styles.css";
 
 function Admin() {
   const [fullName, setFullName] = useState({
-    fName: "John",
-    lName: "Doe",
+    fName: "A",
+    lName: "K",
   });
 
   const [visible, setVisible] = useState(true);

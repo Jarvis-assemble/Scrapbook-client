@@ -29,12 +29,7 @@ function Scrapbook({ pages }) {
               ) : (
                 <>
                   <h3 className="memory-text">{memory.title}</h3>
-                  {memory.picture && (
-                    <img
-                      src={`http://localhost:5000${memory.picture}`}
-                      alt="Memory"
-                    />
-                  )}
+                  {memory.picture && <img src={memory.picture} alt="Memory" />}
                   <p className="memory-text">{memory.message}</p>
                   <p className="memory-text date">
                     <strong>Date:</strong> {memory.date}

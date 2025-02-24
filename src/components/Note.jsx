@@ -12,7 +12,7 @@ function Note({ title }) {
 
   // Fetch existing memories when component mounts
   useEffect(() => {
-    fetch("http://localhost:5000/memories")
+    fetch("https://scrapbook-server.vercel.app/memories/")
       .then((res) => res.json())
       .then((data) => setMemoryPages(data))
       .catch((err) => console.error("Error fetching data", err));
@@ -20,7 +20,7 @@ function Note({ title }) {
 
   // Function to add a new memory
   function handleAddMemory(newMemory) {
-    fetch("http://localhost:5000/memories", {
+    fetch("https://scrapbook-server.vercel.app/memories/", {
       method: "POST",
       body: newMemory, // This should be FormData (updated in AddMemory.js)
     })
@@ -39,7 +39,7 @@ function Note({ title }) {
           : "add-memory-container"
       }`}
     >
-      <h1>{title}</h1>
+      <h1>{title.toUpperCase()}</h1>
       {title.toLowerCase() === "scrapbook" ? (
         <Scrapbook pages={memoryPages} />
       ) : title.toLowerCase() === "adding-memories" ? (
