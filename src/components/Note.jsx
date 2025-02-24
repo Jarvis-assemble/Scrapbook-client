@@ -34,7 +34,7 @@ function Note({ title }) {
   return (
     <div
       className={`container ${
-        title.toLowerCase() === "scrapbook"
+        title.toLowerCase() === "memories"
           ? "scrapbook-container"
           : "add-memory-container"
       }`}

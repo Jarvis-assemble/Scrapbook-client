@@ -1,7 +1,7 @@
 const list = [
   {
     id: 1,
-    title: "scrapbook",
+    title: "Memories",
   },
   {
     id: 2,
