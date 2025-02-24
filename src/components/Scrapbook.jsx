@@ -15,7 +15,7 @@ function Scrapbook({ pages }) {
           minWidth={300}
           maxWidth={800}
           minHeight={400}
-          maxHeight={700}
+          maxHeight={1200}
           maxShadowOpacity={0.7}
           showCover={true}
           drawShadow={true}
