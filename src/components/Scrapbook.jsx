@@ -32,10 +32,7 @@ function Scrapbook({ pages }) {
                   {memory.picture && <img src={memory.picture} alt="Memory" />}
                   <p className="memory-text">{memory.message}</p>
                   <p className="memory-text date">
-                    <strong>Date:</strong>{" "}
-                    {memory.date
-                      ? new Date(memory.date).toISOString().split("T")[0]
-                      : ""}
+                    <strong>Date:</strong> {memory.date}
                   </p>
                 </>
               )}
