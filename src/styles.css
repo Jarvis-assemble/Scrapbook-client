@@ -43,8 +43,8 @@ body {
 }
 
 .scrapbook-container {
-  min-width: 1000px;
-  height: 150vh;
+  min-width: 1300px;
+  height: 120vh;
 }
 
 .add-memory-container {
@@ -54,6 +54,9 @@ body {
 
 /* Center and scale the flipbook */
 .flipbook-container {
+  display: flex;
+  align-items: left;
+  flex-direction: row;
   width: 90%;
   max-width: 1000px; /* Ensures full view of both left & right pages */
   height: 90%;

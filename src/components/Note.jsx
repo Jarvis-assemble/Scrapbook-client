@@ -42,7 +42,7 @@ function Note({ title }) {
       <h1>{title.toUpperCase()}</h1>
       {title.toLowerCase() === "memories" ? (
         <Scrapbook pages={memoryPages} />
-      ) : title.toLowerCase() === "adding-memories" ? (
+      ) : title.toLowerCase() === "capture" ? (
         <AddMemory onAddMemory={handleAddMemory} />
       ) : null}
     </div>
