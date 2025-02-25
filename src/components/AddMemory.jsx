@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
-function AddMemory({ onAddMemory }) {
+function AddMemory({ handleAddMemory }) {
+  const fileInputRef = useRef(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  const [memory, setMemory] = useState({
+  const [myMemory, setMyMemory] = useState({
     title: "",
     picture: null,
     message: "",
@@ -12,7 +13,7 @@ function AddMemory({ onAddMemory }) {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setMemory((prev) => ({
+    setMyMemory((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -20,7 +21,7 @@ function AddMemory({ onAddMemory }) {
 
   function handleFileChange(event) {
     const file = event.target.files[0];
-    setMemory((prev) => ({
+    setMyMemory((prev) => ({
       ...prev,
       picture: file,
     }));
@@ -30,28 +31,18 @@ function AddMemory({ onAddMemory }) {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append("title", memory.title);
-    formData.append("message", memory.message);
-    formData.append("date", memory.date);
-    if (memory.picture) {
-      formData.append("picture", memory.picture); // Append image file
+    formData.append("title", myMemory.title);
+    formData.append("message", myMemory.message);
+    formData.append("date", myMemory.date);
+    if (myMemory.picture) {
+      formData.append("picture", myMemory.picture); // Append image file
     }
 
     setIsUploading(true); // Start upload
 
-    onAddMemory(formData)
-      .then(() => {
-        setMemory({ title: "", picture: null, message: "", date: "" });
-        window.alert("Uploaded!!");
-      })
-      .catch(() => {
-        window.alert("Failed to upload memory. Please try again!");
-      })
-      .finally(() => {
-        setIsUploading(false);
-        window.location.reload();
-      });
-    // setMemory({ title: "", picture: null, message: "", date: "" });
+    setMyMemory({ title: "", picture: null, message: "", date: "" });
+    fileInputRef.current.value = "";
+    handleAddMemory(formData);
   }
 
   return (
@@ -63,12 +54,13 @@ function AddMemory({ onAddMemory }) {
             type="text"
             name="title"
             placeholder="Memory Title"
-            value={memory.title}
+            value={myMemory.title}
             onChange={handleChange}
             required
           />
           <input
             type="file"
+            ref={fileInputRef}
             accept="image/*"
             onChange={handleFileChange}
             required
@@ -77,14 +69,14 @@ function AddMemory({ onAddMemory }) {
             type="text"
             name="message"
             placeholder="Write a message"
-            value={memory.message}
+            value={myMemory.message}
             onChange={handleChange}
             required
           />
           <input
             type="date"
             name="date"
-            value={memory.date}
+            value={myMemory.date}
             onChange={handleChange}
             required
           />
@@ -95,10 +87,10 @@ function AddMemory({ onAddMemory }) {
         </form>
       </div>
 
-      {memory.picture && (
+      {myMemory.picture && (
         <div className="preview">
           <img
-            src={URL.createObjectURL(memory.picture)}
+            src={URL.createObjectURL(myMemory.picture)}
             alt="Preview"
             className="memory-img"
           />

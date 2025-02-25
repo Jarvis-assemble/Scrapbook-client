@@ -2,38 +2,19 @@ import React, { useState, useEffect } from "react";
 import Scrapbook from "./Scrapbook";
 import AddMemory from "./AddMemory";
 
-function createNote(i) {
-  return <Note key={i.id} title={i.title} />;
+function createNote(note, memoryPages, handleAddMemory) {
+  return (
+    <Note
+      key={note.id}
+      title={note.title}
+      memoryPages={memoryPages}
+      handleAddMemory={handleAddMemory}
+    />
+  );
 }
 
-function Note({ title }) {
+function Note({ title, memoryPages, handleAddMemory }) {
   console.log("Rendering Note with title:", title); // Debugging
-  const [memoryPages, setMemoryPages] = useState([]);
-
-  // Fetch existing memories when component mounts
-  useEffect(() => {
-    fetch("https://scrapbook-server.vercel.app/memories/")
-      .then((res) => res.json())
-      .then((data) => setMemoryPages(data))
-      .catch((err) => console.error("Error fetching data", err));
-  }, []);
-
-  // Function to add a new memory
-  function handleAddMemory(newMemory) {
-    fetch("https://scrapbook-server.vercel.app/memories/", {
-      method: "POST",
-      body: newMemory, // This should be FormData (updated in AddMemory.js)
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setMemoryPages((prev) => [...prev, data]); // Update immediately
-        return data;
-      })
-      .catch((err) => {
-        console.error("Error saving memory", err);
-        throw err; // Ensure rejection if there is an error
-      });
-  }
 
   return (
     <div
@@ -47,7 +28,7 @@ function Note({ title }) {
       {title.toLowerCase() === "memories" ? (
         <Scrapbook pages={memoryPages} />
       ) : title.toLowerCase() === "capture" ? (
-        <AddMemory onAddMemory={handleAddMemory} />
+        <AddMemory handleAddMemory={handleAddMemory} />
       ) : null}
     </div>
   );
