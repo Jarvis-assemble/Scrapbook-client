@@ -43,6 +43,7 @@ function AddMemory({ handleAddMemory }) {
     setMyMemory({ title: "", picture: null, message: "", date: "" });
     fileInputRef.current.value = "";
     handleAddMemory(formData);
+    setIsUploading(false); // Start upload
   }
 
   return (
