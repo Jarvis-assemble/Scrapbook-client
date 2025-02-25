@@ -35,8 +35,15 @@ function AddMemory({ onAddMemory }) {
       formData.append("picture", memory.picture); // Append image file
     }
 
-    onAddMemory(formData);
-    setMemory({ heading: "", picture: null, message: "", date: "" });
+    onAddMemory(formData)
+      .then(() => {
+        alert("Memory uploaded successfully! 🎉"); // Show success message
+        setMemory({ title: "", picture: null, message: "", date: "" });
+      })
+      .catch(() => {
+        alert("Failed to upload memory. Please try again.");
+      });
+    // setMemory({ title: "", picture: null, message: "", date: "" });
     window.location.reload();
   }
 
