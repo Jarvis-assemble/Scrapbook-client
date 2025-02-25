@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function AddMemory({ onAddMemory }) {
   const [isUploading, setIsUploading] = useState(false);
@@ -40,17 +38,14 @@ function AddMemory({ onAddMemory }) {
     }
 
     setIsUploading(true); // Start upload
-    toast.info("Molding memory...");
 
     onAddMemory(formData)
       .then(() => {
-        toast.dismiss(); // Remove loading toast
-        toast.success("Memory etched ! 🎉 ");
         setMemory({ title: "", picture: null, message: "", date: "" });
+        window.alert("Uploaded!!");
       })
       .catch(() => {
-        toast.dismiss();
-        toast.error("Failed to upload memory. Please try again!");
+        window.alert("Failed to upload memory. Please try again!");
       })
       .finally(() => {
         setIsUploading(false);
@@ -109,7 +104,6 @@ function AddMemory({ onAddMemory }) {
           />
         </div>
       )}
-      {isUploading && <ToastContainer position="top-right" autoClose={false} />}
     </div>
   );
 }

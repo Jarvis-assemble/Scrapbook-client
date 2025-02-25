@@ -8,11 +8,10 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-pageflip": "^2.0.3",
-    "react-scripts": "3.2.0",
-    "react-toastify": "^11.0.5"
+    "react-scripts": "3.2.0"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
+    "gh-pages": "^6.3.0",
     "typescript": "3.3.3"
   },
   "scripts": {
