@@ -27,7 +27,7 @@ function AddMemory({ handleAddMemory }) {
     }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData();
@@ -35,15 +35,21 @@ function AddMemory({ handleAddMemory }) {
     formData.append("message", myMemory.message);
     formData.append("date", myMemory.date);
     if (myMemory.picture) {
-      formData.append("picture", myMemory.picture); // Append image file
+      formData.append("picture", myMemory.picture);
     }
 
     setIsUploading(true); // Start upload
 
+    try {
+      await handleAddMemory(formData); // Wait for the upload to finish
+    } catch (error) {
+      console.error("Upload failed:", error);
+    }
+
+    setIsUploading(false); // Reset after successful upload or failure
+
     setMyMemory({ title: "", picture: null, message: "", date: "" });
     fileInputRef.current.value = "";
-    handleAddMemory(formData);
-    setIsUploading(false); // Start upload
   }
 
   return (

@@ -23,31 +23,32 @@ function App() {
   }, []);
 
   // Function to add a new memory
-  function handleAddMemory(newMemory) {
-    fetch("https://scrapbook-server.vercel.app/memories/", {
-      method: "POST",
-      body: newMemory, // This should be FormData (updated in AddMemory.js)
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to save memory");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("Post Result:", data);
-        setMemoryPages((prev) => {
-          if (prev.length < 2) {
-            return [...prev, data]; // If there are less than 2 items, just append
-          }
-          return [...prev.slice(0, -1), data, prev[prev.length - 1]];
-        });
-        return data;
-      })
-      .catch((err) => {
-        console.error("Error saving memory", err);
-        throw err; // Ensure rejection if there is an error
+  async function handleAddMemory(newMemory) {
+    try {
+      const res = await fetch("https://scrapbook-server.vercel.app/memories/", {
+        method: "POST",
+        body: newMemory, // FormData
       });
+
+      if (!res.ok) {
+        throw new Error("Failed to save memory");
+      }
+
+      const data = await res.json();
+      console.log("Post Result:", data);
+
+      setMemoryPages((prev) => {
+        if (prev.length < 2) {
+          return [...prev, data]; // Append if less than 2 items
+        }
+        return [...prev.slice(0, -1), data, prev[prev.length - 1]];
+      });
+
+      return data; // Return the response so handleSubmit can await it
+    } catch (err) {
+      console.error("Error saving memory", err);
+      throw err; // Ensures rejection if there’s an error
+    }
   }
 
   return (
