@@ -27,8 +27,12 @@ function Note({ title }) {
       .then((res) => res.json())
       .then((data) => {
         setMemoryPages((prev) => [...prev, data]); // Update immediately
+        return data;
       })
-      .catch((err) => console.error("Error saving memory", err));
+      .catch((err) => {
+        console.error("Error saving memory", err);
+        throw err; // Ensure rejection if there is an error
+      });
   }
 
   return (
