@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddMemory({ onAddMemory }) {
+  const [isUploading, setIsUploading] = useState(false);
+
   const [memory, setMemory] = useState({
     title: "",
     picture: null,
@@ -35,16 +39,24 @@ function AddMemory({ onAddMemory }) {
       formData.append("picture", memory.picture); // Append image file
     }
 
+    setIsUploading(true); // Start upload
+    toast.info("Molding memory...");
+
     onAddMemory(formData)
       .then(() => {
-        alert("Memory uploaded successfully! 🎉"); // Show success message
+        toast.dismiss(); // Remove loading toast
+        toast.success("Memory etched ! 🎉 ");
         setMemory({ title: "", picture: null, message: "", date: "" });
       })
       .catch(() => {
-        alert("Failed to upload memory. Please try again.");
+        toast.dismiss();
+        toast.error("Failed to upload memory. Please try again!");
+      })
+      .finally(() => {
+        setIsUploading(false);
+        window.location.reload();
       });
     // setMemory({ title: "", picture: null, message: "", date: "" });
-    window.location.reload();
   }
 
   return (
@@ -82,8 +94,8 @@ function AddMemory({ onAddMemory }) {
             required
           />
           <hr />
-          <button type="submit">
-            <span>Remember✨</span>
+          <button type="submit" disabled={isUploading}>
+            {isUploading ? "Remembering..." : "Remember✨"}
           </button>
         </form>
       </div>
@@ -97,6 +109,7 @@ function AddMemory({ onAddMemory }) {
           />
         </div>
       )}
+      {isUploading && <ToastContainer position="top-right" autoClose={false} />}
     </div>
   );
 }
